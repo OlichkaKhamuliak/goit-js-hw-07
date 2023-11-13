@@ -30,22 +30,23 @@ function handleClick(evt) {
     }
     
         // Отримуємо джерело зображення та відображення в консолі
-    const photoIdSource = evt.target.dataset.source;
-    console.log(photoIdSource);
+    const imageUrl = evt.target.dataset.source;
+    console.log(imageUrl);
 
     // Знаходимо об'єкт фотографії в масиві
-    const galleryPhoto = galleryItems.find(({original: photoId}) => photoId === photoIdSource)
+    // const galleryPhoto = galleryItems.find(({original: photoId}) => photoId === imageUrl) //тоді в наступному буде alt='${galleryPhoto.description}'
 
-    const lightbox = basicLightbox.create(`
-    <img src="${photoIdSource}" alt='${galleryPhoto.description}'>
+    const instance = basicLightbox.create(`
+    <img src="${imageUrl}" alt='${evt.target.alt}'>
 `);
-    lightbox.show();  
+    instance.show();  
 
     // Додаємо обробник події клавіші "Escape" для закриття lightbox
-    document.addEventListener('keydown', evt => {
+    document.addEventListener('keydown', function handleKeyPress (evt) {
 
         if (evt.key === 'Escape') {
-            lightbox.close()
+            instance.close()
+            document.removeEventListener('keydown', handleKeyPress)
         }
     })
 }
