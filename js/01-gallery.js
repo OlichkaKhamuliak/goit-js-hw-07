@@ -49,6 +49,7 @@ function handleClick(evt) {
         if (evt.key === 'Escape') {
             instance.close()
             document.removeEventListener('keydown', handleKeyPress)
+            console.log('hello');
         }
     }
 }
