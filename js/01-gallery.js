@@ -42,11 +42,14 @@ function handleClick(evt) {
     instance.show();  
 
     // Додаємо обробник події клавіші "Escape" для закриття lightbox
-    document.addEventListener('keydown', function handleKeyPress (evt) {
+    document.addEventListener('keydown', handleKeyPress);
+
+    function handleKeyPress(evt) {
 
         if (evt.key === 'Escape') {
             instance.close()
             document.removeEventListener('keydown', handleKeyPress)
         }
-    })
+    }
 }
+
